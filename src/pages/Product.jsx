@@ -15,7 +15,7 @@ function Product() {
         <div className="align-content">
           <img src={thumbnail} alt="" />
           <h1 className="text-4xl mb-3 text-center"><b>Product - {product.title}</b></h1>
-          <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box mb-3">
+          <div className="carousel carousel-center p-4 space-x-4 bg-neutral rounded-box mb-3">
             {product.images.map((image) => {
               return (
                 <div key={image} className="carousel-item">
