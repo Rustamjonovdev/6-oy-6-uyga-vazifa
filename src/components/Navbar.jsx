@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import NavLinks from "./NavLink";
 // dark and light mode link
 import { IoSunnyOutline, IoMoonOutline } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
+// context
+import { createContext } from "react";
+import { GlobalContext } from "../context/useGlobal";
 const themes = {
   winter: "winter",
   dracula: "dracula",
@@ -15,12 +18,13 @@ function themFromLocalStorage() {
 }
 
 function Navbar() {
+  const { dispatch, user } = useContext(GlobalContext);
   const [currentTheme, setCurrentTheme] = useState(themFromLocalStorage());
 
   const handleMode = () => {
     const newTheme =
       currentTheme == currentTheme ? themes.dracula : themes.winter;
-      setCurrentTheme(newTheme)
+    setCurrentTheme(newTheme);
   };
 
   useEffect(() => {
@@ -28,7 +32,10 @@ function Navbar() {
     localStorage.setItem("theme", currentTheme);
   }, [currentTheme]);
 
-  console.log(currentTheme);
+  const handleLogout = () => {
+    dispatch({ type: "LOG_OUT"});
+  };
+
   return (
     <div className="bg-base-300 py-6 mb-10">
       <div className="navbar align-content">
@@ -66,9 +73,10 @@ function Navbar() {
             {/* moon icon */}
             <IoMoonOutline className="swap-off fill-current w-7 h-7" />
           </label>
-          <Link to="/" className="btn btn-primary">
-            login
-          </Link>
+          { user && <p>{user.displayName}</p> }
+          <button onClick={handleLogout} className="btn btn-primary">
+            LogOut
+          </button>
         </div>
       </div>
     </div>

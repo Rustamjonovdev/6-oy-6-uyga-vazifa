@@ -12,8 +12,8 @@ function Home() {
     <div>
       <div className="align-content">
         <h1 className="text-3xl text-center mb-3">All products</h1>
-        { isPending && <h3 className="text-xl text-center">Loading...</h3>}
-        <ProductsList products={products}/>
+        {isPending && <h3 className="text-xl text-center">Loading...</h3>}
+        <ProductsList products={products} />
       </div>
     </div>
   );
